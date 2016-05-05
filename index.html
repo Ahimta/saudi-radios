@@ -10,7 +10,26 @@
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
         integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7">
 
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"
+          integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"></script>
   <script src="assets/jwplayer.js"></script>
+
+  <script>
+    $(document).ready(function ()
+    {
+      jwplayer('playerOIsZlfzEbfLc').setup({
+        file: 'assets/jwplayer.file.m3u8',
+        image: 'assets/jwplayer.logo.png',
+        title: 'إذاعة الرياض',
+        width: '400',
+        height:'250',
+        aspectratio: '16:10',
+        autostart: 'true'
+      })
+    })
+  </script>
 </head>
 <body>
   <header class="page-header">
@@ -29,21 +48,5 @@
       </object>
     </article>
   </main>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"
-          integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"></script>
-
-  <script>
-    jwplayer('playerOIsZlfzEbfLc').setup({
-      file: 'assets/jwplayer.file.m3u8',
-      image: 'assets/jwplayer.logo.png',
-      title: 'إذاعة الرياض',
-      width: '400',
-      height:'250',
-      aspectratio: '16:10',
-      autostart: 'true'
-    })
-  </script>
 </body>
 </html>
