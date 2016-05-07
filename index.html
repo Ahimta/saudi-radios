@@ -28,6 +28,9 @@
         image: 'assets/jwplayer.logo.png',
         title: 'إذاعة الرياض',
         autostart: 'false',
+        events: {
+          onPlay: function (event) { radios.saudia.stop() }
+        }
       })
     })
 
@@ -38,6 +41,9 @@
         image: 'http://saudia.sr.sa/ar/images/logo.png',
         title: 'الإذاعة السعودية',
         autostart: 'true',
+        events: {
+          onPlay: function (event) { radios.riyadh.stop() }
+        }
       })
     })
   </script>
