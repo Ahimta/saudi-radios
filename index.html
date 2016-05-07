@@ -26,10 +26,17 @@
         file: 'http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel02/index.m3u8',
         image: 'assets/jwplayer.logo.png',
         title: 'إذاعة الرياض',
-        width: '400',
-        height:'250',
-        aspectratio: '16:10',
-        autostart: 'true'
+        autostart: 'false',
+      })
+    })
+
+    $(document).ready(function ()
+    {
+      jwplayer('playerOIsZlfzEbfLc2').setup({
+        file: 'http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel04/index.m3u8',
+        image: 'http://saudia.sr.sa/ar/images/logo.png',
+        title: 'الإذاعة السعودية',
+        autostart: 'true',
       })
     })
   </script>
@@ -40,9 +47,19 @@
   </header>
 
   <main class="container">
-    <article class="text-center">
+    <article class="col-md-6">
       <object type="application/x-shockwave-flash" data="assets/jwplayer.flash.swf" width="100%" height="100%"
               bgcolor="#000000" id="playerOIsZlfzEbfLc" name="playerOIsZlfzEbfLc"
+              class="jwswf swfPrev-beforeswfanchor0 swfNext-afterswfanchor0" tabindex="0">
+              <param name="allowfullscreen" value="true">
+              <param name="allowscriptaccess" value="always">
+              <param name="seamlesstabbing" value="true">
+              <param name="wmode" value="opaque">
+      </object>
+    </article>
+    <article class="col-md-6">
+      <object type="application/x-shockwave-flash" data="assets/jwplayer.flash.swf" width="100%" height="100%"
+              bgcolor="#000000" id="playerOIsZlfzEbfLc2" name="playerOIsZlfzEbfLc2"
               class="jwswf swfPrev-beforeswfanchor0 swfNext-afterswfanchor0" tabindex="0">
               <param name="allowfullscreen" value="true">
               <param name="allowscriptaccess" value="always">
