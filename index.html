@@ -20,9 +20,10 @@
   </script>
 
   <script>
+    var radios = {riyadh: null, saudi: null}
     $(document).ready(function ()
     {
-      jwplayer('playerOIsZlfzEbfLc').setup({
+      radios.riyadh = jwplayer('playerOIsZlfzEbfLc').setup({
         file: 'http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel02/index.m3u8',
         image: 'assets/jwplayer.logo.png',
         title: 'إذاعة الرياض',
@@ -32,7 +33,7 @@
 
     $(document).ready(function ()
     {
-      jwplayer('playerOIsZlfzEbfLc2').setup({
+      radios.saudia = jwplayer('playerOIsZlfzEbfLc2').setup({
         file: 'http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel04/index.m3u8',
         image: 'http://saudia.sr.sa/ar/images/logo.png',
         title: 'الإذاعة السعودية',
