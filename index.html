@@ -29,7 +29,7 @@
         title: 'إذاعة الرياض',
         autostart: 'false',
         events: {
-          onPlay: function (event) { radios.saudia.stop(); radios.jeddah.stop() }
+          onPlay: function (event) { radios.saudia.stop(); radios.jeddah.stop(); radios.neda.stop() }
         }
       })
     })
@@ -42,7 +42,7 @@
         title: 'الإذاعة السعودية',
         autostart: 'true',
         events: {
-          onPlay: function (event) { radios.riyadh.stop(); radios.jeddah.stop() }
+          onPlay: function (event) { radios.riyadh.stop(); radios.jeddah.stop(); radios.neda.stop() }
         }
       })
     })
@@ -55,7 +55,20 @@
         title: 'إذاعة جدة',
         autostart: 'false',
         events: {
-          onPlay: function (event) { radios.riyadh.stop(); radios.saudia.stop() }
+          onPlay: function (event) { radios.riyadh.stop(); radios.saudia.stop(); radios.neda.stop() }
+        }
+      })
+    })
+
+    $(document).ready(function ()
+    {
+      radios.neda = jwplayer('nedaRadio').setup({
+        file: 'http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel06/index.m3u8',
+        image: 'http://neda.sr.sa/images/logo.png',
+        title: 'إذاعة نداء الإسلام',
+        autostart: 'false',
+        events: {
+          onPlay: function (event) { radios.riyadh.stop(); radios.saudia.stop(); radios.jeddah.stop() }
         }
       })
     })
@@ -90,6 +103,16 @@
     <article class="col-md-6">
       <object type="application/x-shockwave-flash" data="assets/jwplayer.flash.swf" width="100%" height="100%"
               bgcolor="#000000" id="jeddahRadio" name="jeddahRadio"
+              class="jwswf swfPrev-beforeswfanchor0 swfNext-afterswfanchor0" tabindex="0">
+              <param name="allowfullscreen" value="true">
+              <param name="allowscriptaccess" value="always">
+              <param name="seamlesstabbing" value="true">
+              <param name="wmode" value="opaque">
+      </object>
+    </article>
+    <article class="col-md-6">
+      <object type="application/x-shockwave-flash" data="assets/jwplayer.flash.swf" width="100%" height="100%"
+              bgcolor="#000000" id="nedaRadio" name="nedaRadio"
               class="jwswf swfPrev-beforeswfanchor0 swfNext-afterswfanchor0" tabindex="0">
               <param name="allowfullscreen" value="true">
               <param name="allowscriptaccess" value="always">
