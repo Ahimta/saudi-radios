@@ -1,173 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Saudi Radios</title>
-
-  <link rel="stylesheet" crossorigin="anonymous"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-        integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7">
-
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"
-          integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"></script>
-  <script src="assets/jwplayer.js"></script>
-  <script>
-    jwplayer.key="12l4A0KVwxV5hD3WVwZqYvKlf2fPyqw3CUprvdlWvWQ="
-  </script>
-
-  <script>
-    var radios = {riyadh: null, saudi: null}
-    $(document).ready(function ()
-    {
-      radios.riyadh = jwplayer('riyadhRadio').setup({
-        file: 'http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel02/index.m3u8',
-        image: 'assets/jwplayer.logo.png',
-        title: 'إذاعة الرياض',
-        autostart: 'false',
-        events: {
-          onPlay: function (event) { radios.saudia.stop(); radios.jeddah.stop(); radios.neda.stop(); radios.quran.stop(); radios.international.stop() }
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Saudi Radios</title>
+    <link rel="stylesheet" crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"></script>
+    <script src="assets/jwplayer.js"></script>
+    <script>
+      jwplayer.key="12l4A0KVwxV5hD3WVwZqYvKlf2fPyqw3CUprvdlWvWQ="
+      
+    </script>
+    <script>
+      (function (window)
+      {
+        var saudiRadios = window.saudiRadios = {}
+        // Array[(id, jwplayerObject)]
+        var stations = []
+      
+        saudiRadios.registerStation = function (elementId, file, image, title, autoStart, cb)
+        {
+          $(document).ready(function ()
+          {
+            stations.push([elementId, jwplayer(elementId).setup({
+              file: file,
+              image: image,
+              title: title,
+              autostart: autoStart,
+              events: {
+                onPlay: function (event)
+                {
+                  // radios.saudia.stop(); radios.jeddah.stop(); radios.neda.stop(); radios.quran.stop(); radios.international.stop()
+                  stations.forEach(function (station)
+                  {
+                    var id = station[0]
+                    var playerObject = station[1]
+      
+                    if (id !== elementId) { playerObject.stop() }
+                  })
+                }
+              }
+            })])
+      
+            if (cb) { cb(stations[elementId]) }
+          })
         }
-      })
-    })
-
-    $(document).ready(function ()
-    {
-      radios.saudia = jwplayer('saudiaRadio').setup({
-        file: 'http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel04/index.m3u8',
-        image: 'http://saudia.sr.sa/ar/images/logo.png',
-        title: 'الإذاعة السعودية',
-        autostart: 'false',
-        events: {
-          onPlay: function (event) { radios.riyadh.stop(); radios.jeddah.stop(); radios.neda.stop(); radios.quran.stop(); radios.international.stop() }
+      })(window)
+      
+    </script>
+    <script>
+      var radios = {riyadh: null, saudi: null}
+      var rs = [
+        {
+          elementId: 'internationalRadio',
+          file: 'http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel05/index.m3u8',
+          image: 'http://international.sr.sa/images/logo.png',
+          title: 'الإذاعة الدولية السعودية',
+          cb: function (playerObject) { radios.international = playerObject }
+        },
+        {
+          elementId: 'nedaRadio',
+          file: 'http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel06/index.m3u8',
+          image: 'http://neda.sr.sa/images/logo.png',
+          title: 'إذاعة نداء الإسلام',
+          autoStart: 'false',
+          cb: function (playerObject) { radios.neda = playerObject }
+        },
+        {
+          elementId: 'jeddahRadio',
+          file: 'http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel03/index.m3u8',
+          image: 'http://jeddah.sr.sa/images/logo.png',
+          title: 'إذاعة جدة',
+          autoStart: 'false',
+          cb: function (playerObject) { radios.jeddah = playerObject }
+        },
+        {
+          elementId: 'saudiaRadio',
+          file: 'http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel04/index.m3u8',
+          image: 'http://saudia.sr.sa/ar/images/logo.png',
+          title: 'الإذاعة السعودية',
+          autoStart: 'false',
+          cb: function (playerObject) { radios.saudia = playerObject }
+        },
+        {
+          elementId: 'riyadhRadio',
+          file: 'http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel02/index.m3u8',
+          image: 'assets/jwplayer.logo.png',
+          title: 'إذاعة الرياض',
+          autoStart: 'false',
+          cb: function (playerObject) { radios.riyadh = playerObject }
+        },
+        {
+          elementId: 'quranRadio',
+          file: 'http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel01/index.m3u8',
+          image: 'http://quran.sr.sa/images/logo.png',
+          title: 'إذاعة القرأن الكريم',
+          autoStart: 'true',
+          cb: function (playerObject) { radios.quran = playerObject }
         }
+      ]
+      
+      rs.forEach(function (r)
+      {
+        window.saudiRadios.registerStation(r.elementId, r.file, r.image, r.title, r.autoStart, r.cb)
       })
-    })
-
-    $(document).ready(function ()
-    {
-      radios.jeddah = jwplayer('jeddahRadio').setup({
-        file: 'http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel03/index.m3u8',
-        image: 'http://jeddah.sr.sa/images/logo.png',
-        title: 'إذاعة جدة',
-        autostart: 'false',
-        events: {
-          onPlay: function (event) { radios.riyadh.stop(); radios.saudia.stop(); radios.neda.stop(); radios.quran.stop(); radios.international.stop() }
-        }
-      })
-    })
-
-    $(document).ready(function ()
-    {
-      radios.neda = jwplayer('nedaRadio').setup({
-        file: 'http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel06/index.m3u8',
-        image: 'http://neda.sr.sa/images/logo.png',
-        title: 'إذاعة نداء الإسلام',
-        autostart: 'false',
-        events: {
-          onPlay: function (event) { radios.riyadh.stop(); radios.saudia.stop(); radios.jeddah.stop(); radios.quran.stop(); radios.international.stop() }
-        }
-      })
-    })
-
-    $(document).ready(function ()
-    {
-      radios.quran = jwplayer('quranRadio').setup({
-        file: 'http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel01/index.m3u8',
-        image: 'http://quran.sr.sa/images/logo.png',
-        title: 'إذاعة القرأن الكريم',
-        autostart: 'true',
-        events: {
-          onPlay: function (event) { radios.riyadh.stop(); radios.saudia.stop(); radios.jeddah.stop(); radios.neda.stop(); radios.international.stop() }
-        }
-      })
-    })
-
-    $(document).ready(function ()
-    {
-      radios.international = jwplayer('internationalRadio').setup({
-        file: 'http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel05/index.m3u8',
-        image: 'http://international.sr.sa/images/logo.png',
-        title: 'الإذاعة الدولية السعودية',
-        autostart: 'false',
-        events: {
-          onPlay: function (event) { radios.riyadh.stop(); radios.saudia.stop(); radios.jeddah.stop(); radios.neda.stop(); radios.quran.stop() }
-        }
-      })
-    })
-  </script>
-</head>
-<body>
-  <header class="page-header">
-    <h1 class="text-center">Saudi Radios</h1>
-  </header>
-
-  <main class="container">
-  <!--<audio controls="" autoplay="" name="media"><source src="http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel04/index.m3u8" type="application/vnd.apple.mpegurl"></audio>-->
-    <!--<iframe width="" height="220" src="http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel04/index.m3u8"></iframe>-->
-    <article class="col-md-6">
-      <object type="application/x-shockwave-flash" data="assets/jwplayer.flash.swf" width="100%" height="100%"
-              bgcolor="#000000" id="quranRadio" name="quranRadio"
-              class="jwswf swfPrev-beforeswfanchor0 swfNext-afterswfanchor0" tabindex="0">
-              <param name="allowfullscreen" value="true">
-              <param name="allowscriptaccess" value="always">
-              <param name="seamlesstabbing" value="true">
-              <param name="wmode" value="opaque">
-      </object>
-    </article>
-    <article class="col-md-6">
-      <object type="application/x-shockwave-flash" data="assets/jwplayer.flash.swf" width="100%" height="100%"
-              bgcolor="#000000" id="nedaRadio" name="nedaRadio"
-              class="jwswf swfPrev-beforeswfanchor0 swfNext-afterswfanchor0" tabindex="0">
-              <param name="allowfullscreen" value="true">
-              <param name="allowscriptaccess" value="always">
-              <param name="seamlesstabbing" value="true">
-              <param name="wmode" value="opaque">
-      </object>
-    </article>
-    <article class="col-md-6">
-      <object type="application/x-shockwave-flash" data="assets/jwplayer.flash.swf" width="100%" height="100%"
-              bgcolor="#000000" id="riyadhRadio" name="riyadhRadio"
-              class="jwswf swfPrev-beforeswfanchor0 swfNext-afterswfanchor0" tabindex="0">
-              <param name="allowfullscreen" value="true">
-              <param name="allowscriptaccess" value="always">
-              <param name="seamlesstabbing" value="true">
-              <param name="wmode" value="opaque">
-      </object>
-    </article>
-    <article class="col-md-6">
-      <object type="application/x-shockwave-flash" data="assets/jwplayer.flash.swf" width="100%" height="100%"
-              bgcolor="#000000" id="jeddahRadio" name="jeddahRadio"
-              class="jwswf swfPrev-beforeswfanchor0 swfNext-afterswfanchor0" tabindex="0">
-              <param name="allowfullscreen" value="true">
-              <param name="allowscriptaccess" value="always">
-              <param name="seamlesstabbing" value="true">
-              <param name="wmode" value="opaque">
-      </object>
-    </article>
-    <article class="col-md-6">
-      <object type="application/x-shockwave-flash" data="assets/jwplayer.flash.swf" width="100%" height="100%"
-              bgcolor="#000000" id="saudiaRadio" name="saudiaRadio"
-              class="jwswf swfPrev-beforeswfanchor0 swfNext-afterswfanchor0" tabindex="0">
-              <param name="allowfullscreen" value="true">
-              <param name="allowscriptaccess" value="always">
-              <param name="seamlesstabbing" value="true">
-              <param name="wmode" value="opaque">
-      </object>
-    </article>
-    <article class="col-md-6">
-      <object type="application/x-shockwave-flash" data="assets/jwplayer.flash.swf" width="100%" height="100%"
-              bgcolor="#000000" id="internationalRadio" name="internationalRadio"
-              class="jwswf swfPrev-beforeswfanchor0 swfNext-afterswfanchor0" tabindex="0">
-              <param name="allowfullscreen" value="true">
-              <param name="allowscriptaccess" value="always">
-              <param name="seamlesstabbing" value="true">
-              <param name="wmode" value="opaque">
-      </object>
-    </article>
-  </main>
-</body>
+    </script>
+  </head>
+  <body>
+    <header class="page-header">
+      <h1 class="text-center">Saudi Radios</h1>
+    </header>
+    <main class="container">
+      <!-- <audio controls="" autoplay="" name="media"><source src="http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel04/index.m3u8" type="application/vnd.apple.mpegurl"></audio>-->
+      <!-- <iframe width="" height="220" src="http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel04/index.m3u8"></iframe>-->
+      <article class="col-md-6">
+        <object id="quranRadio" type="application/x-shockwave-flash" data="assets/jwplayer.flash.swf" width="100%" height="100%" bgcolor="#000000" name="quranRadio" tabindex="0" class="jwswf swfPrev-beforeswfanchor0 swfNext-afterswfanchor0">
+          <param name="allowfullscreen" value="true">
+          <param name="allowscriptaccess" value="always">
+          <param name="seamlesstabbing" value="true">
+          <param name="wmode" value="opaque">
+        </object>
+      </article>
+      <article class="col-md-6">
+        <object id="nedaRadio" type="application/x-shockwave-flash" data="assets/jwplayer.flash.swf" width="100%" height="100%" bgcolor="#000000" name="nedaRadio" tabindex="0" class="jwswf swfPrev-beforeswfanchor0 swfNext-afterswfanchor0">
+          <param name="allowfullscreen" value="true">
+          <param name="allowscriptaccess" value="always">
+          <param name="seamlesstabbing" value="true">
+          <param name="wmode" value="opaque">
+        </object>
+      </article>
+      <article class="col-md-6">
+        <object id="riyadhRadio" type="application/x-shockwave-flash" data="assets/jwplayer.flash.swf" width="100%" height="100%" bgcolor="#000000" name="riyadhRadio" tabindex="0" class="jwswf swfPrev-beforeswfanchor0 swfNext-afterswfanchor0">
+          <param name="allowfullscreen" value="true">
+          <param name="allowscriptaccess" value="always">
+          <param name="seamlesstabbing" value="true">
+          <param name="wmode" value="opaque">
+        </object>
+      </article>
+      <article class="col-md-6">
+        <object id="jeddahRadio" type="application/x-shockwave-flash" data="assets/jwplayer.flash.swf" width="100%" height="100%" bgcolor="#000000" name="jeddahRadio" tabindex="0" class="jwswf swfPrev-beforeswfanchor0 swfNext-afterswfanchor0">
+          <param name="allowfullscreen" value="true">
+          <param name="allowscriptaccess" value="always">
+          <param name="seamlesstabbing" value="true">
+          <param name="wmode" value="opaque">
+        </object>
+      </article>
+      <article class="col-md-6">
+        <object id="saudiaRadio" type="application/x-shockwave-flash" data="assets/jwplayer.flash.swf" width="100%" height="100%" bgcolor="#000000" name="saudiaRadio" tabindex="0" class="jwswf swfPrev-beforeswfanchor0 swfNext-afterswfanchor0">
+          <param name="allowfullscreen" value="true">
+          <param name="allowscriptaccess" value="always">
+          <param name="seamlesstabbing" value="true">
+          <param name="wmode" value="opaque">
+        </object>
+      </article>
+      <article class="col-md-6">
+        <object id="internationalRadio" type="application/x-shockwave-flash" data="assets/jwplayer.flash.swf" width="100%" height="100%" bgcolor="#000000" name="internationalRadio" tabindex="0" class="jwswf swfPrev-beforeswfanchor0 swfNext-afterswfanchor0">
+          <param name="allowfullscreen" value="true">
+          <param name="allowscriptaccess" value="always">
+          <param name="seamlesstabbing" value="true">
+          <param name="wmode" value="opaque">
+        </object>
+      </article>
+    </main>
+    <hr>
+    <footer>
+      <p dir="rtl" class="text-center lead"><a target="_blank" href="https://sa.linkedin.com/in/ahimta" onclick="ga('send', 'event', 'Footer', 'click', 'LinkedIn Profile Link')">
+          ©
+          2016
+          عبدالله الأنصاري</a></p>
+    </footer>
+  </body>
 </html>
