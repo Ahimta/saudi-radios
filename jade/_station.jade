@@ -5,7 +5,7 @@ mixin station(id, file, image, title, autoStart)
     div.panel.panel-primary.text-center
       header.panel-heading= title
       div.panel-body
-        audio.visible-xs(name='media' controls)
+        audio.visible-xs(name='media' style='width: 100%' controls)
           source(type='application/vnd.apple.mpegurl' src=file)
         div.hidden-xs: object.jwswf.swfPrev-beforeswfanchor0.swfNext-afterswfanchor0(id=id, type='application/x-shockwave-flash', data='assets/jwplayer.flash.swf', bgcolor='#000000', name='quranRadio', tabindex='0')
           param(name='allowfullscreen', value='true')
