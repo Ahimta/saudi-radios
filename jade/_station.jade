@@ -1,0 +1,14 @@
+mixin station(id, file, image, title, autoStart)
+  if file
+    script window.saudiRadios.registerStation('#{id}', '#{file}', '#{image}', '#{title}', #{autoStart})
+  article.col-md-6
+    div.panel.panel-primary.text-center
+      header.panel-heading= title
+      div.panel-body
+        audio.visible-xs(name='media' controls)
+          source(type='application/vnd.apple.mpegurl' src=file)
+        div.hidden-xs: object.jwswf.swfPrev-beforeswfanchor0.swfNext-afterswfanchor0(id=id, type='application/x-shockwave-flash', data='assets/jwplayer.flash.swf', bgcolor='#000000', name='quranRadio', tabindex='0')
+          param(name='allowfullscreen', value='true')
+          param(name='allowscriptaccess', value='always')
+          param(name='seamlesstabbing', value='true')
+          param(name='wmode', value='opaque')
