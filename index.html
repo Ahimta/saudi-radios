@@ -55,8 +55,26 @@
     </script>
   </head>
   <body>
-    <header class="page-header">
-      <h1 class="text-center">الإذاعات السعودية</h1>
+    <header style="margin-bottom: 7em;">
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" aria-expanded="false" data-toggle="collapse" data-target="#navbar" onclick="ga('send', 'event', 'Navigation', 'click', 'Navbar Toggle')" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="#/" ng-click="$event.preventDefault()" style="cursor: default;" class="navbar-brand">
+              <!-- <span class="glyphicon glyphicon-home" aria-hidden="true"></span>--></a>
+          </div>
+          <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a target="_blank" href="https://twitter.com/intent/tweet?via=ahymta&amp;url=http%3A//ahimta.github.io/saudi-radios/" onclick="ga('send', 'event', 'Navigation', 'click', 'Contact Us')" class="text-right">راسلنا</a></li>
+              <li class="dropdown text-right"><a dir="rtl" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="ga('send', 'event', 'Navigation', 'click', 'Other Websites')" class="dropdown-toggle">مواقع أخرى<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a target="_blank" href="https://ahimta.github.io/fuel-consumption-calculator" onclick="ga('send', 'event', 'Navigation', 'click', 'Gasoline, Water and Electricity Prices')" class="text-right">أسعار البنزين و المياه و الكهرباء</a></li>
+                  <li><a target="_blank" href="https://ahimta.github.io/bagi" onclick="ga('send', 'event', 'Navigation', 'click', 'Bagi')" class="text-right">باقي</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
     <main class="container">
       <script>window.saudiRadios.registerStation('quranRadio', 'http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel01/index.m3u8', 'http://quran.sr.sa/images/logo.png', 'إذاعة القرأن الكريم', false)</script>
