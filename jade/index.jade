@@ -53,7 +53,25 @@ html(lang='ar')
               }
             })
 
-            stations.push({id: elementId, player: player})
+            var htmlPlayer = null
+
+            try
+            {
+              htmlPlayer = document.getElementById(elementId).parentNode.parentNode.querySelector('audio')
+              htmlPlayer.addEventListener('play', function ()
+              {
+                stations
+                    .filter(function (station) { return station.id !== elementId })
+                    .forEach(function (station)
+                    {
+                      console.log('play', station)
+                      try { station.htmlPlayer.pause() } catch (ex) {}
+                    })
+              })
+            }
+            catch (ex) {}
+
+            stations.push({id: elementId, player: player, htmlPlayer: htmlPlayer})
 
             if (cb) { cb(player) }
           })
