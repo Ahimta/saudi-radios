@@ -1,17 +1,15 @@
 CACHE MANIFEST
 
 CACHE:
-https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css
-https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js
-https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js
-
+http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css
+http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js
+http://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js
 http://quran.sr.sa/images/logo.png
 http://neda.sr.sa/images/logo.png
 http://riyadh.sr.sa/images/logo.png
 http://jeddah.sr.sa/images/logo.png
 http://saudia.sr.sa/ar/images/logo.png
 http://international.sr.sa/images/logo.png
-
 assets/jwplayer.flash.swf
 assets/jwplayer.js
 index.html
