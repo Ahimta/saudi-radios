@@ -11,6 +11,9 @@ html(lang='ar' manifest='app.manifest')
 
     title الإذاعات السعودية
 
+    script.
+      if (window.location.protocol === 'https:') { window.location.protocol = 'http' }
+
     link(rel='stylesheet', crossorigin='anonymous', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7')
 
     script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js', crossorigin='anonymous')
