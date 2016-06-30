@@ -31,42 +31,57 @@
         var saudiRadios = window.saudiRadios = {}
         var stations = []
       
+        saudiRadios.flashInstalled = (function ()
+        {
+          try              { return Boolean(new ActiveXObject('ShockwaveFlash.ShockwaveFlash'))                  }
+          catch(exception) { return ('undefined' != typeof navigator.mimeTypes['application/x-shockwave-flash']) }
+        })()
+      
         saudiRadios.registerStation = function (elementId, file, image, title, autoStart, cb)
         {
           $(document).ready(function ()
           {
-            var player = jwplayer(elementId).setup({
-              file: file,
-              image: image,
-              title: title,
-              autostart: autoStart,
-              events: {
-                onPlay: function (event)
-                {
-                  stations
-                    .filter(function (station) { return station.id !== elementId })
-                    .forEach(function (station) { station.player.stop() })
-                }
-              }
-            })
-      
             var htmlPlayer = null
+            var player = null
       
-            try
+            if (saudiRadios.flashInstalled)
             {
-              htmlPlayer = document.getElementById(elementId).parentNode.parentNode.querySelector('audio')
-              htmlPlayer.addEventListener('play', function ()
-              {
-                stations
-                    .filter(function (station) { return station.id !== elementId })
-                    .forEach(function (station)
-                    {
-                      console.log('play', station)
-                      try { station.htmlPlayer.pause() } catch (ex) {}
-                    })
+              player = jwplayer(elementId).setup({
+                file: file,
+                image: image,
+                title: title,
+                autostart: autoStart,
+                events: {
+                  onPlay: function (event)
+                  {
+                    stations
+                      .filter(function (station) { return station.id !== elementId })
+                      .forEach(function (station) { station.player.stop() })
+                  }
+                }
               })
             }
-            catch (ex) {}
+            else
+            {
+              try
+              {
+                htmlPlayer = document.getElementById(elementId).parentNode.parentNode.querySelector('audio')
+      
+                htmlPlayer.addEventListener('play', function ()
+                {
+                  stations
+                      .filter(function (station) { return station.id !== elementId })
+                      .forEach(function (station)
+                      {
+                        console.log('play', station)
+                        try { station.htmlPlayer.pause() } catch (ex) {}
+                      })
+                })
+      
+                $(htmlPlayer).fadeIn()
+              }
+              catch (ex) {}
+            }
       
             stations.push({id: elementId, player: player, htmlPlayer: htmlPlayer})
       
@@ -104,17 +119,14 @@
         <div class="panel panel-primary text-center">
           <header class="panel-heading">إذاعة القرآن الكريم</header>
           <div class="panel-body">
-            <audio name="media" style="width: 100%" controls="controls" class="visible-xs">
-              <source type="application/vnd.apple.mpegurl" src="http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel01/index.m3u8"/>
-            </audio>
-            <div class="hidden-xs">
-              <object id="quranRadio" type="application/x-shockwave-flash" data="assets/jwplayer.flash.swf" bgcolor="#000000" name="quranRadio" tabindex="0" class="jwswf swfPrev-beforeswfanchor0 swfNext-afterswfanchor0">
-                <param name="allowfullscreen" value="true"/>
-                <param name="allowscriptaccess" value="always"/>
-                <param name="seamlesstabbing" value="true"/>
-                <param name="wmode" value="opaque"/>
-              </object>
-            </div>
+            <article>
+              <audio name="media" style="width: 100%; display: none" controls="controls">
+                <source type="application/vnd.apple.mpegurl" src="http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel01/index.m3u8"/>
+              </audio>
+            </article>
+            <article>
+              <div id="quranRadio" style="display: none"></div>
+            </article>
           </div>
         </div>
       </article>
@@ -123,17 +135,14 @@
         <div class="panel panel-primary text-center">
           <header class="panel-heading">إذاعة نداء الإسلام</header>
           <div class="panel-body">
-            <audio name="media" style="width: 100%" controls="controls" class="visible-xs">
-              <source type="application/vnd.apple.mpegurl" src="http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel06/index.m3u8"/>
-            </audio>
-            <div class="hidden-xs">
-              <object id="nedaRadio" type="application/x-shockwave-flash" data="assets/jwplayer.flash.swf" bgcolor="#000000" name="quranRadio" tabindex="0" class="jwswf swfPrev-beforeswfanchor0 swfNext-afterswfanchor0">
-                <param name="allowfullscreen" value="true"/>
-                <param name="allowscriptaccess" value="always"/>
-                <param name="seamlesstabbing" value="true"/>
-                <param name="wmode" value="opaque"/>
-              </object>
-            </div>
+            <article>
+              <audio name="media" style="width: 100%; display: none" controls="controls">
+                <source type="application/vnd.apple.mpegurl" src="http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel06/index.m3u8"/>
+              </audio>
+            </article>
+            <article>
+              <div id="nedaRadio" style="display: none"></div>
+            </article>
           </div>
         </div>
       </article>
@@ -142,17 +151,14 @@
         <div class="panel panel-primary text-center">
           <header class="panel-heading">إذاعة الرياض</header>
           <div class="panel-body">
-            <audio name="media" style="width: 100%" controls="controls" class="visible-xs">
-              <source type="application/vnd.apple.mpegurl" src="http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel02/index.m3u8"/>
-            </audio>
-            <div class="hidden-xs">
-              <object id="riyadhRadio" type="application/x-shockwave-flash" data="assets/jwplayer.flash.swf" bgcolor="#000000" name="quranRadio" tabindex="0" class="jwswf swfPrev-beforeswfanchor0 swfNext-afterswfanchor0">
-                <param name="allowfullscreen" value="true"/>
-                <param name="allowscriptaccess" value="always"/>
-                <param name="seamlesstabbing" value="true"/>
-                <param name="wmode" value="opaque"/>
-              </object>
-            </div>
+            <article>
+              <audio name="media" style="width: 100%; display: none" controls="controls">
+                <source type="application/vnd.apple.mpegurl" src="http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel02/index.m3u8"/>
+              </audio>
+            </article>
+            <article>
+              <div id="riyadhRadio" style="display: none"></div>
+            </article>
           </div>
         </div>
       </article>
@@ -161,17 +167,14 @@
         <div class="panel panel-primary text-center">
           <header class="panel-heading">إذاعة جدة</header>
           <div class="panel-body">
-            <audio name="media" style="width: 100%" controls="controls" class="visible-xs">
-              <source type="application/vnd.apple.mpegurl" src="http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel03/index.m3u8"/>
-            </audio>
-            <div class="hidden-xs">
-              <object id="jeddahRadio" type="application/x-shockwave-flash" data="assets/jwplayer.flash.swf" bgcolor="#000000" name="quranRadio" tabindex="0" class="jwswf swfPrev-beforeswfanchor0 swfNext-afterswfanchor0">
-                <param name="allowfullscreen" value="true"/>
-                <param name="allowscriptaccess" value="always"/>
-                <param name="seamlesstabbing" value="true"/>
-                <param name="wmode" value="opaque"/>
-              </object>
-            </div>
+            <article>
+              <audio name="media" style="width: 100%; display: none" controls="controls">
+                <source type="application/vnd.apple.mpegurl" src="http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel03/index.m3u8"/>
+              </audio>
+            </article>
+            <article>
+              <div id="jeddahRadio" style="display: none"></div>
+            </article>
           </div>
         </div>
       </article>
@@ -180,17 +183,14 @@
         <div class="panel panel-primary text-center">
           <header class="panel-heading">الإذاعة السعودية</header>
           <div class="panel-body">
-            <audio name="media" style="width: 100%" controls="controls" class="visible-xs">
-              <source type="application/vnd.apple.mpegurl" src="http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel04/index.m3u8"/>
-            </audio>
-            <div class="hidden-xs">
-              <object id="saudiaRadio" type="application/x-shockwave-flash" data="assets/jwplayer.flash.swf" bgcolor="#000000" name="quranRadio" tabindex="0" class="jwswf swfPrev-beforeswfanchor0 swfNext-afterswfanchor0">
-                <param name="allowfullscreen" value="true"/>
-                <param name="allowscriptaccess" value="always"/>
-                <param name="seamlesstabbing" value="true"/>
-                <param name="wmode" value="opaque"/>
-              </object>
-            </div>
+            <article>
+              <audio name="media" style="width: 100%; display: none" controls="controls">
+                <source type="application/vnd.apple.mpegurl" src="http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel04/index.m3u8"/>
+              </audio>
+            </article>
+            <article>
+              <div id="saudiaRadio" style="display: none"></div>
+            </article>
           </div>
         </div>
       </article>
@@ -199,17 +199,14 @@
         <div class="panel panel-primary text-center">
           <header class="panel-heading">الإذاعة الدولية السعودية</header>
           <div class="panel-body">
-            <audio name="media" style="width: 100%" controls="controls" class="visible-xs">
-              <source type="application/vnd.apple.mpegurl" src="http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel05/index.m3u8"/>
-            </audio>
-            <div class="hidden-xs">
-              <object id="internationalRadio" type="application/x-shockwave-flash" data="assets/jwplayer.flash.swf" bgcolor="#000000" name="quranRadio" tabindex="0" class="jwswf swfPrev-beforeswfanchor0 swfNext-afterswfanchor0">
-                <param name="allowfullscreen" value="true"/>
-                <param name="allowscriptaccess" value="always"/>
-                <param name="seamlesstabbing" value="true"/>
-                <param name="wmode" value="opaque"/>
-              </object>
-            </div>
+            <article>
+              <audio name="media" style="width: 100%; display: none" controls="controls">
+                <source type="application/vnd.apple.mpegurl" src="http://cmt-live.hls.adaptive.level3.net/cmt/radiochannel05/index.m3u8"/>
+              </audio>
+            </article>
+            <article>
+              <div id="internationalRadio" style="display: none"></div>
+            </article>
           </div>
         </div>
       </article>
