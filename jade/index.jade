@@ -36,6 +36,306 @@ html(lang='ar')
       {
         var saudiRadios = window.saudiRadios = {}
         var stations = []
+        var schedules = window.saudiRadios.schedules = {}
+
+        schedules.riyadhRadio = [
+          {
+            name: 'أحلى صباح', period: 120,
+            runs: {
+              sun: {hour: 7, minute: 0},
+              mon: {hour: 7, minute: 0},
+              tue: {hour: 7, minute: 0},
+              wed: {hour: 7, minute: 0},
+              thu: {hour: 7, minute: 0}
+            }
+          },
+          {
+            name: 'أسواق و مؤشرات', period: 30,
+            runs: {
+              sun: {hour: 15, minute: 30},
+              mon: {hour: 15, minute: 30},
+              tue: {hour: 15, minute: 30},
+              wed: {hour: 15, minute: 30},
+              thu: {hour: 15, minute: 30}
+            }
+          },
+          {
+            name: 'صوت المواطن', period: 60,
+            runs: {
+              sun: {hour: 16, minute: 0},
+              mon: {hour: 16, minute: 0},
+              tue: {hour: 16, minute: 0},
+              wed: {hour: 16, minute: 0},
+              thu: {hour: 16, minute: 0}
+            }
+          },
+          {
+            name: 'وجه المساء', period: 12,
+            runs: {
+              sun: {hour: 18, minute: 0},
+              mon: {hour: 18, minute: 0},
+              tue: {hour: 18, minute: 0},
+              wed: {hour: 18, minute: 0},
+              thu: {hour: 18, minute: 0}
+            }
+          }
+        ]
+
+        schedules.quranRadio = [
+          {
+            name: 'اللهم بك أصبحنا', period: 90,
+            runs: {
+              sun: {hour: 6, minute: 15},
+              mon: {hour: 6, minute: 15},
+              tue: {hour: 6, minute: 15},
+              wed: {hour: 6, minute: 15},
+              thu: {hour: 6, minute: 15}
+            }
+          },
+          {
+            name: 'قضايا و حوارات', period: 55,
+            runs: {
+              tue: {hour: 16, minute: 10}
+            }
+          },
+          {
+            name: 'سماحة الإسلام', period: 13,
+            runs: {
+              wed: {hour: 13, minute: 45},
+              fri: {hour: 20, minute: 40}
+            }
+          },
+          {
+            name: 'سابقوا', period: 30,
+            runs: {
+              mon: {hour: 13, minute: 15},
+              tue: {hour: 22, minute: 3}
+            }
+          },
+          {
+            name: 'حماية الفكر', period: 11,
+            runs: {
+              mon: {hour: 23, minute: 0},
+              fri: {hour: 12, minute: 0}
+            }
+          },
+          {
+            name: 'أخلاقنا', period: 12,
+            runs: {
+              mon: {hour: 9, minute: 30},
+              fri: {hour: 22, minute: 3}
+            }
+          },
+          {
+            name: 'قراءة من تفسير أضواء البيان', period: 10,
+            runs: {
+              sun: {hour: 2, minute: 0},
+              mon: {hour: 2, minute: 0},
+              tue: {hour: 2, minute: 0},
+              wed: {hour: 2, minute: 0},
+              thu: {hour: 2, minute: 0},
+              fri: {hour: 2, minute: 0},
+              sat: {hour: 2, minute: 0}
+            }
+          },
+          {
+            name: 'الفتوى و المجتمع', period: 10,
+            runs: {
+              thu: {hour: 13, minute: 45},
+              fri: {hour: 19, minute: 20}
+            }
+          },
+          {
+            name: 'رياض الصالحين', period: 17,
+            runs: {
+              wed: {hour: 13, minute: 3},
+              thu: {hour: 16, minute: 10}
+            }
+          },
+          {
+            name: 'المسلمون في العالم مشاهد و رحلات', period: 30,
+            runs: {
+              thu: {hour: 10, minute: 40}
+            }
+          },
+          {
+            name: 'شرح كتاب التوحيد من المنتقى', period: 18,
+            runs: {
+              tue: {hour: 11, minute: 10},
+              sat: {hour: 19, minute: 25}
+            }
+          },
+          {
+            name: 'مع القرآن', period: 60,
+            runs: {
+              sun: {hour: 12, minute: 3},
+              mon: {hour: 12, minute: 3},
+              tue: {hour: 12, minute: 3},
+              wed: {hour: 12, minute: 3},
+              thu: {hour: 12, minute: 3},
+
+              sun: {hour: 2, minute: 0},
+              mon: {hour: 2, minute: 0},
+              tue: {hour: 2, minute: 0},
+              wed: {hour: 2, minute: 0},
+              thu: {hour: 2, minute: 0}
+            }
+          },
+          {
+            name: 'فقه اللغة العربية', period: 8,
+            runs: {
+              tue: {hour: 11, minute: 15},
+              wed: {hour: 19, minute: 25}
+            }
+          },
+          {
+            name: 'في رحاب آية', period: 11,
+            runs: {
+              sun: {hour: 20, minute: 53},
+              mon: {hour: 20, minute: 53},
+              tue: {hour: 20, minute: 53},
+              wed: {hour: 20, minute: 53},
+              thu: {hour: 20, minute: 53},
+              fri: {hour: 20, minute: 53},
+              sat: {hour: 20, minute: 53}
+            }
+          },
+          {
+            name: 'كيف تقرأ القرآن الكريم', period: 9,
+            runs: {
+              sun: {hour: 11, minute: 20},
+              mon: {hour: 11, minute: 20},
+              tue: {hour: 11, minute: 20},
+              wed: {hour: 11, minute: 20},
+              thu: {hour: 11, minute: 20},
+              fri: {hour: 11, minute: 20},
+              sat: {hour: 11, minute: 20}
+            }
+          }
+        ]
+
+        function indexToDay (dayIndex)
+        {
+          var days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']
+          return days[dayIndex]
+        }
+
+        function formatHour (hour)
+        {
+          if (hour == 0) { return '12' }
+          if (hour > 12) { return '' + (hour - 12) }
+          if (hour < 10) { return '0' + hour }
+          return '' + hour
+        }
+
+        function formatMinute (minute)
+        {
+          if (minute < 10) { return '0' + minute }
+          else             { return ''  + minute }
+        }
+
+        function formatAMorPM (hour, formattedTime)
+        {
+          if (hour > 12 || hour === 0) { return 'م' }
+          else                         { return 'ص' }
+        }
+
+        function formatTime (hour, minute)
+        {
+          var formattedMinute = formatMinute(minute)
+          var formattedHour = formatHour(hour)
+          var amOrPm = formatAMorPM(hour)
+
+          return formattedHour + ':' + formattedMinute + ' ' + amOrPm
+        }
+
+        function formatPeriod (periodInMinutes)
+        {
+          return periodInMinutes + ' ' + 'دقيقة'
+        }
+
+        function processSchedules (schedules)
+        {
+          var currentDate = new Date()
+          var currentDay = indexToDay(currentDate.getDay())
+          var currentMinute = currentDate.getHours() * 60 + currentDate.getMinutes()
+          var x = {}
+
+          Object.keys(schedules).forEach(function (radioId)
+          {
+            var schedule = schedules[radioId]
+            var s = []
+
+            schedule.forEach(function (program)
+            {
+              if (program.runs[currentDay])
+              {
+                var time = program.runs[currentDay]
+                var startMinutes = time.hour * 60 + time.minute
+                var endMinutes = startMinutes + program.period
+                var isAiring = currentMinute >= startMinutes && currentMinute <= endMinutes
+
+                s.push({name: program.name, period: program.period, hour: time.hour, minute: time.minute, isAiring: isAiring})
+              }
+            })
+
+            x[radioId] = s.sort(function (x, y)
+            {
+              return (x.hour === y.hour) ? (x.minute - y.minute) : (x.hour - y.hour)
+            })
+          })
+
+          return x
+        }
+
+        function generateScheduleDOM (processedSchedule)
+        {
+          if (processedSchedule.length === 0) { return '' }
+          else
+          {
+            var rows = processedSchedule.map(function (program)
+            {
+              var openingTag = program.isAiring ? "<tr class='success'>" : "<tr>"
+
+              return (openingTag +
+                        "<td class='text-center'>" + formatTime(program.hour, program.minute) + "</td>" +
+                        "<td class='text-center'>" + program.name + "</td>" +
+                        "<td class='text-center'>" + formatPeriod(program.period) + "</td>" +
+                      "</tr>")
+            })
+
+            return ("<table class='table table-condensed table-hover' dir='rtl'>" +
+                      "<thead>" +
+                        "<tr>" +
+                          "<th class='text-center'>الوقت</th>" +
+                          "<th class='text-center'>اسم البرنامج</th>" +
+                          "<th class='text-center'>المدة</th>" +
+                        "</tr>" +
+                      "</thead>" +
+                      "<tbody>" +
+                        rows +
+                      "</tbody" +
+                    "</table>")
+          }
+        }
+
+        function displaySchedules (processedSchedules)
+        {
+          Object.keys(processedSchedules).forEach(function (scheduleId)
+          {
+            var schedule = processedSchedules[scheduleId]
+            var tableWrapper = document.querySelector('[data-schedule-table-id=' + scheduleId + ']')
+            console.log(generateScheduleDOM(schedule))
+            if (tableWrapper) { tableWrapper.innerHTML = generateScheduleDOM(schedule) }
+            else { console.log(scheduleId, schedule) }
+          })
+        }
+
+        $(document).ready(function ()
+        {
+          displaySchedules(processSchedules(saudiRadios.schedules))
+          setInterval(function () { displaySchedules(processSchedules(saudiRadios.schedules)) }, 10000)
+        })
 
         saudiRadios.flashInstalled = (function ()
         {
@@ -54,9 +354,10 @@ html(lang='ar')
             {
               player = jwplayer(elementId).setup({
                 file: file,
-                image: image,
                 title: title,
                 autostart: autoStart,
+                width: '100%',
+                height: '100%',
                 events: {
                   onPlay: function (event)
                   {
@@ -71,7 +372,7 @@ html(lang='ar')
             {
               try
               {
-                htmlPlayer = document.getElementById(elementId).parentNode.parentNode.querySelector('audio')
+                htmlPlayer = document.querySelector('audio[data-station-id=' + elementId + ']')
 
                 htmlPlayer.addEventListener('play', function ()
                 {
@@ -163,4 +464,3 @@ html(lang='ar')
       transform:rotate(-45deg);
       z-index: 9999;
     }
-
