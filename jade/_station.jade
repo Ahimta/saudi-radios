@@ -1,8 +1,5 @@
-mixin station(id, file, image, title, autoStart, schedule)
-  if file
-    script window.saudiRadios.registerStation('#{id}', '#{file}', '#{image}', '#{title}', #{autoStart})
-  //- TODO: remove <script> and move parameters to data-* attributes
-  article
+mixin station(id, file, title)
+  article(data-station data-id=id data-file=file data-title=title)
     div.panel.panel-primary
       header.panel-heading.text-center= title
       div.panel-body.text-center
