@@ -50,33 +50,25 @@
     var currentDate = new Date()
     var currentDay = indexToDay(currentDate.getDay())
     var currentMinute = currentDate.getHours() * 60 + currentDate.getMinutes()
-    var x = {}
 
-    Object.keys(schedules).forEach(function (radioId)
+    return _.mapValues(schedules, function (schedule)
     {
-      var schedule = schedules[radioId]
-      var s = []
-
-      schedule.forEach(function (program)
-      {
-        if (program.runs[currentDay])
+      return schedule
+        .filter(function (program) { return program.runs[currentDay] })
+        .map(function (program)
         {
           var time = program.runs[currentDay]
           var startMinutes = time.hour * 60 + time.minute
           var endMinutes = startMinutes + program.period
           var isAiring = currentMinute >= startMinutes && currentMinute <= endMinutes
 
-          s.push({name: program.name, period: program.period, hour: time.hour, minute: time.minute, isAiring: isAiring})
-        }
-      })
-
-      x[radioId] = s.sort(function (x, y)
-      {
-        return (x.hour === y.hour) ? (x.minute - y.minute) : (x.hour - y.hour)
-      })
+          return {name: program.name, period: program.period, hour: time.hour, minute: time.minute, isAiring: isAiring}
+        })
+        .sort(function (x, y)
+        {
+          return (x.hour === y.hour) ? (x.minute - y.minute) : (x.hour - y.hour)
+        })
     })
-
-    return x
   }
 
   function generateScheduleDOM (processedSchedule)
@@ -112,11 +104,9 @@
 
   function displaySchedules (processedSchedules)
   {
-    Object.keys(processedSchedules).forEach(function (scheduleId)
+    _.forEach(processedSchedules, function (schedule, scheduleId)
     {
-      var schedule = processedSchedules[scheduleId]
       var tableWrapper = document.querySelector('[data-schedule-table-id=' + scheduleId + ']')
-
       if (tableWrapper) { tableWrapper.innerHTML = generateScheduleDOM(schedule) }
     })
   }
