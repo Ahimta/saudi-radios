@@ -43,7 +43,7 @@
     {
       try
       {
-        player = document.querySelector('audio[data-station-id=' + elementId + ']')
+        var player = document.querySelector('audio[data-station-id=' + elementId + ']')
 
         player.addEventListener('play', function ()
         {
