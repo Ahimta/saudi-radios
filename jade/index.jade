@@ -107,16 +107,13 @@ html(lang='ar')
   script(src='assets/display-schedules.js')
 
   script.
-    $(document).ready(function ()
+    Array.prototype.slice.apply(document.querySelectorAll('[data-station]')).forEach(function (stationElement)
     {
-      Array.prototype.slice.apply(document.querySelectorAll('[data-station]')).forEach(function (stationElement)
-      {
-        var file = stationElement.getAttribute('data-file')
-        var title = stationElement.getAttribute('data-title')
-        var id = stationElement.getAttribute('data-id')
+      var file = stationElement.getAttribute('data-file')
+      var title = stationElement.getAttribute('data-title')
+      var id = stationElement.getAttribute('data-id')
 
-        window.saudiRadios.registerStation(id, file, title)
-      })
-
-      window.saudiRadios.displayAndRefreshSchedules()
+      window.saudiRadios.registerStation(id, file, title)
     })
+
+    window.saudiRadios.displayAndRefreshSchedules()
