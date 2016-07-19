@@ -41,9 +41,11 @@
 
     return function (elementId, file, title)
     {
+      var player = null
+
       try
       {
-        var player = document.querySelector('audio[data-station-id=' + elementId + ']')
+        player = document.querySelector('audio[data-station-id=' + elementId + ']')
 
         player.addEventListener('play', function ()
         {
