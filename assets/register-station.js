@@ -65,5 +65,6 @@
     }
   })()
 
-  saudiRadios.registerStation = flashInstalled ? registerFlashStation : registerHTML5Station
+  // saudiRadios.registerStation = flashInstalled ? registerFlashStation : registerHTML5Station
+  saudiRadios.registerStation = registerHTML5Station
 })(window)

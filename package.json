@@ -4,7 +4,8 @@
   "description": "All saudi radios in one page",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "gulp watch"
   },
   "repository": {
     "type": "git",
