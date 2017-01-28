@@ -1,6 +1,5 @@
 {
   "name": "saudi-radios",
-  "version": "0.0.0",
   "description": "All saudi radios in one page",
   "main": "index.html",
   "scripts": {
@@ -23,7 +22,8 @@
     "url": "https://github.com/Ahimta/saudi-radios/issues"
   },
   "homepage": "https://github.com/Ahimta/saudi-radios#readme",
-  "dependencies": {
+  "devDependencies": {
+    "eslint": "^3.14.1",
     "gulp": "^3.9.1",
     "gulp-changed": "^1.3.0",
     "gulp-connect": "^4.1.0",
