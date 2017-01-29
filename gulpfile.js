@@ -1,26 +1,13 @@
-'use strict'
-
-let gulp = require('gulp'),
-    changed = require('gulp-changed'),
-    connect = require('gulp-connect'),
-    ghPages = require('gulp-gh-pages'),
-    jade    = require('gulp-jade')
-
-let runSequence = require('run-sequence')
-
-gulp.task('jade', () =>
-{
-  gulp.src('jade/*.jade')
-    .pipe(jade({pretty: true}))
-    .pipe(gulp.dest('./'))
-})
+const gulp = require('gulp')
+const connect = require('gulp-connect')
+const ghPages = require('gulp-gh-pages')
 
 gulp.task('server:connect', () =>
 {
-  connect.server({
-    livereload: true,
+  return connect.server({
     fallback: './index.html',
     host: 'localhost',
+    livereload: true,
     port: 8080,
     root: './'
   })
@@ -28,24 +15,18 @@ gulp.task('server:connect', () =>
 
 gulp.task('server:reload', () =>
 {
-  gulp.src('{gulpfile.js,index.html,package.json}')
-    .pipe(changed('{gulpfile.js,index.html,package.json}'))
+  return gulp.src('{app.manifest,favicon.png,index.html}')
+    .pipe(gulp.src('{app.manifest,favicon.png,index.html}'))
     .pipe(connect.reload())
 })
 
-gulp.task('deploy', function ()
+gulp.task('deploy', () =>
 {
-  let remoteUrl = 'https://github.com/Ahimta/bagi.git'
-  return gulp.src('{index.html}')
+  return gulp.src('{app.manifest,favicon.png,index.html}')
     .pipe(ghPages())
-})
-
-gulp.task('reload', (callback) =>
-{
-  runSequence('jade', 'server:reload', callback)
 })
 
 gulp.task('watch', ['server:connect'], () =>
 {
-  gulp.watch(['{gulpfile.js,package.json,jade/*.jade}'], ['reload'])
+  return gulp.watch(['{app.manifest,favicon.png,index.html}'], ['server:reload'])
 })
